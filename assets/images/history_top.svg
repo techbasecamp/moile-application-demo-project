@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="416" height="364" viewBox="0 0 416 364">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_11498" data-name="Rectangle 11498" width="416" height="364" transform="translate(92 1)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="0.871" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#93202e"/>
+      <stop offset="1" stop-color="#bd2130"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.552" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_17515" data-name="Group 17515" transform="translate(-92 -1)">
+    <g id="Mask_Group_12474" data-name="Mask Group 12474" clip-path="url(#clip-path)">
+      <g id="Group_17511" data-name="Group 17511" transform="translate(92 75)">
+        <ellipse id="Background" cx="287" cy="286.5" rx="287" ry="286.5" transform="translate(-79 -286)" fill="url(#linear-gradient)" style="mix-blend-mode: multiply;isolation: isolate"/>
+        <rect id="Rectangle_854" data-name="Rectangle 854" width="415" height="690" transform="translate(0 210)" fill="url(#linear-gradient-2)"/>
+      </g>
+    </g>
+  </g>
+</svg>
