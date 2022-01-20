@@ -1,5 +1,4 @@
 import 'package:demo_project/routes/app_pages.dart';
-import 'package:demo_project/view/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -15,17 +14,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Demo Project',
-      theme: ThemeData(),
-      home: ScreenUtilInit(
-        designSize: const Size(415, 900),
-        builder: () => const SplashPage(),
+    return ScreenUtilInit(
+      designSize: const Size(415, 900),
+      builder: () => GetMaterialApp(
+        title: 'A Ramen Staff',
+        theme: ThemeData(),
+        initialRoute: AppPages.initialRoute,
+        getPages: AppPages.routes,
+        initialBinding: AppBinding(),
       ),
-      initialRoute: AppPages.initialRoute,
-      getPages: AppPages.routes,
-      initialBinding: AppBinding(),
     );
   }
 }

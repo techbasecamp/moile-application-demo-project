@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 class AuthViewModel extends GetxController {
   late final IStaffService service;
 
-  AuthViewModel({required this.service});
+  AuthViewModel(this.service);
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();

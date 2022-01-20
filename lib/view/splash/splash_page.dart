@@ -1,15 +1,18 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:demo_project/assets/app_colors.dart';
 import 'package:demo_project/assets/assets.dart';
+import 'package:demo_project/viewmodels/splash_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends GetView<SplashViewModel> {
   const SplashPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    controller.init();
     return Scaffold(
       backgroundColor: AppColor.greyBackground,
       body: Stack(

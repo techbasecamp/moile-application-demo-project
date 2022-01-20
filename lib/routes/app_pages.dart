@@ -1,6 +1,7 @@
 import 'package:demo_project/view/home/home_page.dart';
 import 'package:demo_project/view/login/login_page.dart';
 import 'package:demo_project/view/splash/splash_page.dart';
+import 'package:demo_project/viewmodels/auth_viewmodel.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
@@ -16,10 +17,16 @@ class AppPages {
     GetPage(
       name: Routes.login,
       page: () => const LoginPage(),
+      binding: BindingsBuilder(
+        () => Get.lazyPut(() => AuthViewModel(Get.find())),
+      ),
     ),
     GetPage(
       name: Routes.home,
       page: () => const HomePage(),
+      binding: BindingsBuilder(
+        () => Get.lazyPut(() => AuthViewModel(Get.find())),
+      ),
     ),
   ];
 }
