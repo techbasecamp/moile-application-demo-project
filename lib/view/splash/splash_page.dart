@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:demo_project/assets/appcolor.dart';
+import 'package:demo_project/assets/app_colors.dart';
 import 'package:demo_project/assets/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

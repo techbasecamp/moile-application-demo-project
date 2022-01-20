@@ -4,8 +4,8 @@ import 'package:demo_project/models/coupons/check_coupon_response.dart';
 import 'package:demo_project/models/coupons/use_coupon_response.dart';
 
 abstract class ICouponRepository {
-  Future<CheckCouponResponse?> checkCoupon(String qrcode);
-  Future<UseCouponResponse?> useCoupon(List<String> qrcodes, List<Menu> menus);
+  Future<CheckCouponResponse> checkCoupon(String qrcode);
+  Future<UseCouponResponse> useCoupon(List<String> qrcodes, List<Menu> menus);
 }
 
 class CouponRepository extends ICouponRepository {
@@ -15,7 +15,7 @@ class CouponRepository extends ICouponRepository {
   CouponRepository({required this.apiService, required this.token});
 
   @override
-  Future<CheckCouponResponse?> checkCoupon(String qrcode) async {
+  Future<CheckCouponResponse> checkCoupon(String qrcode) async {
     try {
       var response = await apiService.postResponse(
         ApiEndPoints.checkQRCode,
@@ -29,7 +29,7 @@ class CouponRepository extends ICouponRepository {
   }
 
   @override
-  Future<UseCouponResponse?> useCoupon(
+  Future<UseCouponResponse> useCoupon(
       List<String> qrcodes, List<Menu> menus) async {
     try {
       var response = await apiService.postResponse(

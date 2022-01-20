@@ -1,7 +1,10 @@
-import 'package:demo_project/view/splash_page.dart';
+import 'package:demo_project/routes/app_pages.dart';
+import 'package:demo_project/view/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import 'binding/app_binding.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +20,12 @@ class MyApp extends StatelessWidget {
       title: 'Demo Project',
       theme: ThemeData(),
       home: ScreenUtilInit(
-          designSize: const Size(415, 900), builder: () => const SplashPage()),
+        designSize: const Size(415, 900),
+        builder: () => const SplashPage(),
+      ),
+      initialRoute: AppPages.initialRoute,
+      getPages: AppPages.routes,
+      initialBinding: AppBinding(),
     );
   }
 }
