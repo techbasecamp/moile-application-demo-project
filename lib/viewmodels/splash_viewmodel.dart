@@ -12,7 +12,6 @@ class SplashViewModel extends GetxController {
       await _service.fetchInfo();
       return Get.offNamed(Routes.home);
     } catch (e) {
-      print(e.toString());
       return Get.offNamed(Routes.login);
     }
   }

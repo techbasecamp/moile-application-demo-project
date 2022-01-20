@@ -4,24 +4,38 @@ import 'package:demo_project/assets/app_styles.dart';
 import 'package:demo_project/assets/assets.dart';
 import 'package:demo_project/components/templates/aramen_card_template.dart';
 import 'package:demo_project/components/widgets/branch_title.dart';
-import 'package:demo_project/components/widgets/default_appbar.dart';
-import 'package:demo_project/routes/app_pages.dart';
-import 'package:demo_project/viewmodels/auth_viewmodel.dart';
+import 'package:demo_project/viewmodels/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class HomePage extends GetView<AuthViewModel> {
+class HomePage extends GetView<HomeViewModel> {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const DefaultAppbar(color: Colors.white),
+      appBar: _buildAppbar(),
       backgroundColor: AppColor.red,
       body: ARamenCardTemplate(content: _buildContent()),
+    );
+  }
+
+  AppBar _buildAppbar() {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      iconTheme: const IconThemeData(color: Colors.white),
+      actions: [
+        IconButton(
+          tooltip: "Logout",
+          onPressed: controller.logout,
+          icon: const Icon(Icons.logout_outlined),
+          iconSize: 35.0,
+        )
+      ],
     );
   }
 
@@ -37,7 +51,7 @@ class HomePage extends GetView<AuthViewModel> {
           icon: _buildCouponIcon(),
           backgroundColor: AppColor.brightRed,
           overlayColor: AppColor.red,
-          onPressed: () => Get.toNamed(Paths.coupon),
+          onPressed: controller.onClickUseCoupon,
         ),
         const Spacer(),
       ],

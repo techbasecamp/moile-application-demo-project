@@ -1,7 +1,5 @@
 import 'package:demo_project/models/staff/login_response.dart';
 import 'package:demo_project/repositories/staff_repository.dart';
-import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class IStaffService {

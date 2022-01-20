@@ -3,12 +3,12 @@ import 'package:demo_project/assets/app_colors.dart';
 import 'package:demo_project/assets/app_styles.dart';
 import 'package:demo_project/components/templates/aramen_card_template.dart';
 import 'package:demo_project/components/widgets/default_button.dart';
-import 'package:demo_project/viewmodels/auth_viewmodel.dart';
+import 'package:demo_project/viewmodels/login_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class LoginPage extends GetView<AuthViewModel> {
+class LoginPage extends GetView<LoginViewModel> {
   const LoginPage({Key? key}) : super(key: key);
 
   @override

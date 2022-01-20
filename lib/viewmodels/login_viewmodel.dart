@@ -6,10 +6,10 @@ import 'package:demo_project/utils/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AuthViewModel extends GetxController {
+class LoginViewModel extends GetxController {
   late final IStaffService _service;
 
-  AuthViewModel(this._service);
+  LoginViewModel(this._service);
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
@@ -17,7 +17,6 @@ class AuthViewModel extends GetxController {
 
   TextEditingController get usernameController => _usernameController;
   TextEditingController get passwordController => _passwordController;
-  String get branchName => _service.branchName;
   GlobalKey<FormState> get formKey => _formKey;
 
   void onClickSignIn() async {
@@ -29,7 +28,7 @@ class AuthViewModel extends GetxController {
       try {
         await _service.login(username, password);
         Get.back();
-        Get.toNamed(Routes.home);
+        Get.offAllNamed(Routes.home);
       } catch (e) {
         Get.back();
         UIUtil()

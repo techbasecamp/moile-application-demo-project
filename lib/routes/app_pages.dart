@@ -1,36 +1,55 @@
+import 'package:demo_project/binding/home_binding.dart';
+import 'package:demo_project/view/home/coupon/submit/submit_coupon_page.dart';
 import 'package:demo_project/view/home/home_page.dart';
 import 'package:demo_project/view/login/login_page.dart';
 import 'package:demo_project/view/splash/splash_page.dart';
-import 'package:demo_project/viewmodels/auth_viewmodel.dart';
+import 'package:demo_project/viewmodels/login_viewmodel.dart';
 import 'package:demo_project/viewmodels/splash_viewmodel.dart';
+import 'package:demo_project/viewmodels/home_viewmodel.dart';
+import 'package:demo_project/viewmodels/submit_coupon_viewmodel.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
-  static const initialRoute = Routes.splash;
+  static const splash = '/';
+
+  static const login = '/login';
+  static const home = '/home';
+
+  static const submit = '/submit';
+  static const list = '/list';
+  static const complete = '/complete';
+  static const qr = '/qr';
 
   static final routes = [
     GetPage(
-      name: "/",
+      name: splash,
       page: () => const SplashPage(),
       binding: BindingsBuilder(
         () => Get.lazyPut(() => SplashViewModel(Get.find())),
       ),
     ),
     GetPage(
-      name: Routes.login,
+      name: login,
       page: () => const LoginPage(),
       binding: BindingsBuilder(
-        () => Get.lazyPut(() => AuthViewModel(Get.find())),
+        () => Get.lazyPut(() => LoginViewModel(Get.find())),
       ),
     ),
     GetPage(
-      name: Routes.home,
+      name: home,
       page: () => const HomePage(),
-      binding: BindingsBuilder(
-        () => Get.lazyPut(() => AuthViewModel(Get.find())),
-      ),
+      binding: HomeBinding(),
+      children: [
+        GetPage(
+          name: submit,
+          page: () => const SubmitCouponPage(),
+          binding: BindingsBuilder(
+            () => Get.lazyPut(() => SubmitCouponViewModel(Get.find())),
+          ),
+        ),
+      ],
     ),
   ];
 }
