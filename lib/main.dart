@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(415, 900),
       builder: () => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'A Ramen Staff',
         theme: ThemeData(),
         getPages: AppPages.routes,

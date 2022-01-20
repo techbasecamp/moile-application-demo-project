@@ -1,5 +1,6 @@
 import 'package:demo_project/models/staff/login_response.dart';
 import 'package:demo_project/repositories/staff_repository.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class IStaffService {
@@ -9,11 +10,17 @@ abstract class IStaffService {
   Future<void> logout();
 }
 
-class StaffService implements IStaffService {
-  String _branchName = "";
+class StaffService extends GetxService implements IStaffService {
+  late String _branchName;
   late final IStaffRepository _repository;
 
   StaffService(this._repository);
+
+  @override
+  void onInit() {
+    super.onInit();
+    _branchName = "";
+  }
 
   @override
   String get branchName => _branchName;

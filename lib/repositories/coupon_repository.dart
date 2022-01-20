@@ -19,7 +19,11 @@ class CouponRepository extends ICouponRepository {
     try {
       var response = await _apiService.postResponse(
         ApiEndPoints.checkQRCode,
-        {"qrcode": qrcode},
+        {
+          "qrcode": qrcode,
+          "coupon_type": "แถมฟรี",
+          "order_channel": "E",
+        },
         token: token,
       );
       return CheckCouponResponse.fromJson(response);
@@ -33,7 +37,7 @@ class CouponRepository extends ICouponRepository {
       String token, List<String> qrcodes, List<Menu> menus) async {
     try {
       var response = await _apiService.postResponse(
-        ApiEndPoints.checkQRCode,
+        ApiEndPoints.useCoupon,
         {
           "qrcode": qrcodes,
           "menu": menus.map((i) => i.toJson()).toList(),

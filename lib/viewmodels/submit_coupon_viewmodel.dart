@@ -1,4 +1,5 @@
 import 'package:demo_project/assets/assets.dart';
+import 'package:demo_project/components/widgets/default_progress_indicator.dart';
 import 'package:demo_project/models/coupons/check_coupon_response.dart';
 import 'package:demo_project/routes/app_pages.dart';
 import 'package:demo_project/services/coupon_service.dart';
@@ -37,29 +38,28 @@ class SubmitCouponViewModel extends GetxController {
   Future<void> onClickConfirm(bool isDialog) async {
     UIUtil ui = UIUtil();
 
-    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) {
       if (_service.hasQrcode(_qrcodeController.text)) {
         ui.showSnackBar(
             "แจ้งเตือน", "ท่านได้เพิ่มคูปองดังกล่าวแล้ว", Assets.aramenLogo2);
       }
 
-      Get.dialog(const CircularProgressIndicator());
+      Get.dialog(const DefaultProgressIndicator());
       CheckCouponResponse coupon;
       try {
         coupon = await _service.addCoupon(_qrcodeController.text);
-        _setError(coupon.validCoupon ? "" : coupon.messageTh);
         Get.back();
+
+        if (coupon.validCoupon) {
+          isDialog ? Get.back() : Get.offNamed(Routes.list);
+        } else {
+          _setError(coupon.validCoupon ? "" : coupon.messageTh);
+        }
       } catch (e) {
         Get.back();
         ui.showSnackBar("แจ้งเตือน", e.toString(), Assets.aramenLogo2);
       }
     }
-
-    isDialog ? Get.offNamed(Routes.list) : Get.back();
-  }
-
-  void onClickQR() {
-    Get.toNamed(Routes.qr);
   }
 
   String? validateQrcode(String? qrcode) {

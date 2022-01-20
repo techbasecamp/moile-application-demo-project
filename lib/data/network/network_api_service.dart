@@ -44,7 +44,6 @@ class NetworkApiService extends BaseApiService {
 
   dynamic returnResponse(http.Response response) {
     Map<String, dynamic> responseJson = jsonDecode(response.body);
-
     switch (response.statusCode) {
       case 200:
         return responseJson;

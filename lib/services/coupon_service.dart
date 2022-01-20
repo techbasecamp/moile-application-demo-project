@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ICouponService {
-  Rx<List<Menu>> get menuList;
-  Rx<Map<String, int>> get qrcode;
+  List<Menu> get menus;
+  Map<String, int> get qrcodes;
   UseCouponResponse? get useCouponDetail;
 
   void removeMenu(String qrcode, String menuID);
@@ -16,51 +16,54 @@ abstract class ICouponService {
   void clearData();
 }
 
-class CouponService implements ICouponService {
-  late final ICouponRepository _repository;
+class CouponService extends GetxService implements ICouponService {
+  List<Menu> _menus = [];
+  Map<String, int> _qrcodes = {};
 
-  final Rx<List<Menu>> _menus = Rx<List<Menu>>([]);
-  final Rx<Map<String, int>> _qrcodes = Rx<Map<String, int>>({});
+  late final ICouponRepository _repository;
 
   UseCouponResponse? _useCouponDetail;
 
   CouponService(this._repository);
 
   @override
-  Rx<List<Menu>> get menuList => _menus;
+  void onInit() {
+    super.onInit();
+    _menus = [];
+    _qrcodes = {};
+  }
 
   @override
-  Rx<Map<String, int>> get qrcode => _qrcodes;
+  List<Menu> get menus => _menus;
+
+  @override
+  Map<String, int> get qrcodes => _qrcodes;
 
   @override
   UseCouponResponse? get useCouponDetail => _useCouponDetail;
 
   @override
   void removeMenu(String qrcode, String menuID) {
-    int? oldMenuNumber = _qrcodes.value[qrcode];
+    int? oldMenuNumber = _qrcodes[qrcode];
 
-    _qrcodes.update((qrcodes) {
-      if (oldMenuNumber == null || oldMenuNumber <= 1) {
-        qrcodes!.remove(qrcode);
-      } else {
-        qrcodes![qrcode] = oldMenuNumber - 1;
-      }
-    });
+    if (oldMenuNumber == null || oldMenuNumber <= 1) {
+      _qrcodes.remove(qrcode);
+    } else {
+      _qrcodes[qrcode] = oldMenuNumber - 1;
+    }
 
-    _menus.update((menus) {
-      menus!.removeWhere((menu) {
-        return menu.freeMenuId == menuID && menu.qrcode == qrcode;
-      });
+    _menus.removeWhere((menu) {
+      return menu.freeMenuId == menuID && menu.qrcode == qrcode;
     });
   }
 
   @override
   Future<CheckCouponResponse> addCoupon(String qrcode) async {
-    CheckCouponResponse? coupon;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString("TOKEN");
 
-    coupon = await _repository.checkCoupon(token!, qrcode);
+    CheckCouponResponse coupon = await _repository.checkCoupon(token!, qrcode);
+
     if (coupon.validCoupon) {
       _addCouponList(coupon, qrcode);
     }
@@ -69,15 +72,11 @@ class CouponService implements ICouponService {
   }
 
   void _addCouponList(CheckCouponResponse coupon, String qrcode) {
-    int? oldMenuNumber = _qrcodes.value[qrcode];
+    int? oldMenuNumber = _qrcodes[qrcode];
 
-    _qrcodes.update((qrcodes) {
-      qrcodes![qrcode] = oldMenuNumber ?? 0 + coupon.menu.length;
-    });
+    _qrcodes[qrcode] = oldMenuNumber ?? 0 + coupon.menu.length;
 
-    _menus.update((menus) {
-      menus!.addAll(coupon.menu);
-    });
+    _menus.addAll(coupon.menu);
   }
 
   @override
@@ -87,20 +86,20 @@ class CouponService implements ICouponService {
 
     _useCouponDetail = await _repository.useCoupon(
       token!,
-      _qrcodes.value.keys.toList(),
-      _menus.value,
+      _qrcodes.keys.toList(),
+      _menus,
     );
   }
 
   @override
   bool hasQrcode(String qrcode) {
-    return _qrcodes.value.containsKey(qrcode);
+    return _qrcodes.containsKey(qrcode);
   }
 
   @override
   void clearData() {
-    _menus.value.clear();
-    _qrcodes.value.clear();
+    _menus.clear();
+    _qrcodes.clear();
     _useCouponDetail = null;
   }
 }

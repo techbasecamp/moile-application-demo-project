@@ -41,20 +41,20 @@ class CheckCouponResponse {
 
   factory CheckCouponResponse.fromJson(Map<String, dynamic> json) =>
       CheckCouponResponse(
-        validCoupon: json["valid_coupon"],
-        messageTh: json["message_th"],
-        messageEn: json["message_en"],
-        memberFirstname: json["member_firstname"],
-        memberId: json["member_id"],
-        memberLastname: json["member_lastname"],
+        validCoupon: json["valid_coupon"] ?? false,
+        messageTh: json["message_th"] ?? "",
+        messageEn: json["message_en"] ?? "",
+        memberFirstname: json["member_firstname"] ?? "",
+        memberId: json["member_id"] ?? 0,
+        memberLastname: json["member_lastname"] ?? "",
         menu: json["menu"] == null
             ? []
             : List<Menu>.from(json["menu"].map((x) => Menu.fromJson(x))),
-        promotionId: json["promotion_id"],
-        promotionImage: json["promotion_image"],
-        promotionTitle: json["promotion_title"],
-        status: json["status"],
-        statusDescription: json["status_description"],
+        promotionId: json["promotion_id"] ?? 0,
+        promotionImage: json["promotion_image"] ?? "",
+        promotionTitle: json["promotion_title"] ?? "",
+        status: json["status"] ?? "",
+        statusDescription: json["status_description"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

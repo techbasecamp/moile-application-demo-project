@@ -129,63 +129,37 @@ class SummitCouponForm extends GetView<SubmitCouponViewModel> {
               maxLines: 2,
             ),
             SizedBox(height: 20.h),
-            Row(
-              children: const [
-                AutoSizeText("Number"),
-                Spacer(),
-                AutoSizeText("Scan QR"),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  flex: 75,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Form(
-                      key: controller.formKey,
-                      child: TextFormField(
-                        maxLength: 8,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        cursorColor: AppColor.brightRed,
-                        controller: controller.qrcodeController,
-                        validator: controller.validateQrcode,
-                        onChanged: controller.onFormChange,
-                        style: _formStyle,
-                        decoration: InputDecoration(
-                          focusedBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: AppColor.brightRed,
-                            ),
-                          ),
-                          hintStyle: _formStyle.copyWith(
-                            color: Colors.black.withOpacity(.1),
-                          ),
-                          hintText: "12345678",
-                          counterText: "",
-                        ),
+            const AutoSizeText("Number"),
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Form(
+                key: controller.formKey,
+                child: TextFormField(
+                  maxLength: 8,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  cursorColor: AppColor.brightRed,
+                  controller: controller.qrcodeController,
+                  validator: controller.validateQrcode,
+                  onChanged: controller.onFormChange,
+                  style: _formStyle,
+                  decoration: InputDecoration(
+                    focusedBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: AppColor.brightRed,
                       ),
                     ),
+                    hintStyle: _formStyle.copyWith(
+                      color: Colors.black.withOpacity(.1),
+                    ),
+                    hintText: "12345678",
+                    counterText: "",
                   ),
                 ),
-                Expanded(
-                  flex: 25,
-                  child: GestureDetector(
-                    onTap: controller.onClickQR,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: SvgPicture.asset(
-                        Assets.qrLogo,
-                        width: 35.w,
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
+              ),
+            )
           ],
         ),
       );
