@@ -4,13 +4,13 @@
 
 import 'dart:convert';
 
-LoginResponse loginResponseFromJson(String str) =>
-    LoginResponse.fromJson(json.decode(str));
+StaffResponse loginResponseFromJson(String str) =>
+    StaffResponse.fromJson(json.decode(str));
 
-String loginResponseToJson(LoginResponse data) => json.encode(data.toJson());
+String loginResponseToJson(StaffResponse data) => json.encode(data.toJson());
 
-class LoginResponse {
-  LoginResponse({
+class StaffResponse {
+  StaffResponse({
     required this.staffId,
     required this.username,
     required this.branchId,
@@ -26,13 +26,13 @@ class LoginResponse {
   final DateTime createdTimestamp;
   final String token;
 
-  factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
+  factory StaffResponse.fromJson(Map<String, dynamic> json) => StaffResponse(
         staffId: json["staff_id"],
         username: json["username"],
         branchId: json["branch_id"],
         branchName: json["branch_name"],
         createdTimestamp: DateTime.parse(json["created_timestamp"]),
-        token: json["token"],
+        token: json["token"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

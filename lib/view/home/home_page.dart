@@ -29,9 +29,7 @@ class HomePage extends GetView<AuthViewModel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        BranchTitle(
-          branchName: controller.branchName,
-        ),
+        BranchTitle(branchName: controller.branchName),
         const Spacer(),
         _buildButton(
           text: "ใช้คูปอง",

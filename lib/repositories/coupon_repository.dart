@@ -4,20 +4,20 @@ import 'package:demo_project/models/coupons/check_coupon_response.dart';
 import 'package:demo_project/models/coupons/use_coupon_response.dart';
 
 abstract class ICouponRepository {
-  Future<CheckCouponResponse> checkCoupon(String qrcode);
-  Future<UseCouponResponse> useCoupon(List<String> qrcodes, List<Menu> menus);
+  Future<CheckCouponResponse> checkCoupon(String token, String qrcode);
+  Future<UseCouponResponse> useCoupon(
+      String token, List<String> qrcodes, List<Menu> menus);
 }
 
 class CouponRepository extends ICouponRepository {
-  late final BaseApiService apiService;
-  late final String token;
+  late final BaseApiService _apiService;
 
-  CouponRepository({required this.apiService, required this.token});
+  CouponRepository(this._apiService);
 
   @override
-  Future<CheckCouponResponse> checkCoupon(String qrcode) async {
+  Future<CheckCouponResponse> checkCoupon(String token, String qrcode) async {
     try {
-      var response = await apiService.postResponse(
+      var response = await _apiService.postResponse(
         ApiEndPoints.checkQRCode,
         {"qrcode": qrcode},
         token: token,
@@ -30,9 +30,9 @@ class CouponRepository extends ICouponRepository {
 
   @override
   Future<UseCouponResponse> useCoupon(
-      List<String> qrcodes, List<Menu> menus) async {
+      String token, List<String> qrcodes, List<Menu> menus) async {
     try {
-      var response = await apiService.postResponse(
+      var response = await _apiService.postResponse(
         ApiEndPoints.checkQRCode,
         {
           "qrcode": qrcodes,

@@ -1,16 +1,19 @@
 import 'package:demo_project/routes/app_pages.dart';
+import 'package:demo_project/services/staff_service.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashViewModel extends GetxController {
-  Future<void> init() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString("TOKEN");
+  late final IStaffService _service;
 
-    if (token == null) {
-      return Get.offNamed(Routes.login);
-    } else {
+  SplashViewModel(this._service);
+
+  Future<void> init() async {
+    try {
+      await _service.fetchInfo();
       return Get.offNamed(Routes.home);
+    } catch (e) {
+      print(e.toString());
+      return Get.offNamed(Routes.login);
     }
   }
 }

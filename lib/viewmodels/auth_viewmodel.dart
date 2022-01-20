@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthViewModel extends GetxController {
-  late final IStaffService service;
+  late final IStaffService _service;
 
-  AuthViewModel(this.service);
+  AuthViewModel(this._service);
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
@@ -17,7 +17,7 @@ class AuthViewModel extends GetxController {
 
   TextEditingController get usernameController => _usernameController;
   TextEditingController get passwordController => _passwordController;
-  String get branchName => "";
+  String get branchName => _service.branchName;
   GlobalKey<FormState> get formKey => _formKey;
 
   void onClickSignIn() async {
@@ -26,15 +26,14 @@ class AuthViewModel extends GetxController {
       String password = _passwordController.text;
 
       Get.dialog(const DefaultProgressIndicator());
-
       try {
-        await service.login(username, password);
+        await _service.login(username, password);
+        Get.back();
         Get.toNamed(Routes.home);
       } catch (e) {
+        Get.back();
         UIUtil()
             .showSnackBar("เกิดข้อผิดพลาด", e.toString(), Assets.aramenLogo2);
-      } finally {
-        Get.back();
       }
     }
   }

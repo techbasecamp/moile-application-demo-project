@@ -2,6 +2,7 @@ import 'package:demo_project/view/home/home_page.dart';
 import 'package:demo_project/view/login/login_page.dart';
 import 'package:demo_project/view/splash/splash_page.dart';
 import 'package:demo_project/viewmodels/auth_viewmodel.dart';
+import 'package:demo_project/viewmodels/splash_viewmodel.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
@@ -11,8 +12,11 @@ class AppPages {
 
   static final routes = [
     GetPage(
-      name: Routes.splash,
+      name: "/",
       page: () => const SplashPage(),
+      binding: BindingsBuilder(
+        () => Get.lazyPut(() => SplashViewModel(Get.find())),
+      ),
     ),
     GetPage(
       name: Routes.login,

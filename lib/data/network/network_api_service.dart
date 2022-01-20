@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../exception.dart';
@@ -33,29 +34,31 @@ class NetworkApiService extends BaseApiService {
     try {
       Map<String, String> headers = _setHeaders(token);
       Uri uri = Uri.parse(baseUrl + url);
-      final response = await http.post(uri, headers: headers, body: jsonBody);
+      final response =
+          await http.post(uri, headers: headers, body: json.encode(jsonBody));
       responseJson = returnResponse(response);
     } on SocketException {
-      throw FetchDataException('No Internet Connection');
+      throw FetchDataException('ไม่มีการเชื่อมต่ออินเตอร์เน็ต');
     }
     return responseJson;
   }
 
   dynamic returnResponse(http.Response response) {
+    Map<String, dynamic> responseJson = jsonDecode(response.body);
+
     switch (response.statusCode) {
       case 200:
-        dynamic responseJson = jsonDecode(response.body);
         return responseJson;
       case 400:
-        throw BadRequestException(response.toString());
+        throw BadRequestException(responseJson["Th"]);
       case 401:
       case 403:
-        throw UnauthorisedException(response.body.toString());
+        throw UnauthorisedException(responseJson["Th"]);
       case 404:
-        throw UnauthorisedException(response.body.toString());
+        throw UnauthorisedException(responseJson["Th"]);
       case 500:
       default:
-        throw FetchDataException('Status code : ${response.statusCode}');
+        throw FetchDataException(responseJson["Th"]);
     }
   }
 }

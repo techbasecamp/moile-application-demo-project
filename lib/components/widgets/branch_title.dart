@@ -25,16 +25,14 @@ class BranchTitle extends StatelessWidget {
           children: [
             SvgPicture.asset(Assets.pinLogo),
             const SizedBox(width: 10),
-            Obx(
-              () => AutoSizeText(
-                textUtil.handleOverflow(branchName, 35),
-                style: TextStyle(
-                  fontSize: 17.sp,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.red,
-                ),
+            AutoSizeText(
+              textUtil.handleOverflow(branchName, 35),
+              style: TextStyle(
+                fontSize: 17.sp,
+                fontWeight: FontWeight.bold,
+                color: AppColor.red,
               ),
-            ),
+            )
           ],
         ),
       ],

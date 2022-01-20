@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
       builder: () => GetMaterialApp(
         title: 'A Ramen Staff',
         theme: ThemeData(),
-        initialRoute: AppPages.initialRoute,
         getPages: AppPages.routes,
         initialBinding: AppBinding(),
       ),
