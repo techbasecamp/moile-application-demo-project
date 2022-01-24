@@ -13,15 +13,37 @@ class LoginPage extends GetView<LoginViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColor.red,
       body: ARamenCardTemplate(
-        content: _buildContent(),
+        content: LoginForm(),
       ),
     );
   }
+}
 
-  Form _buildContent() {
+class LoginButton extends GetView<LoginViewModel> {
+  const LoginButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: DefaultButton(
+        title: "เข้าสู่ระบบ",
+        onPressed: controller.onClickSignIn,
+      ),
+    );
+  }
+}
+
+class LoginForm extends GetView<LoginViewModel> {
+  const LoginForm({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Form(
       key: controller.formKey,
       child: Column(
@@ -30,40 +52,43 @@ class LoginPage extends GetView<LoginViewModel> {
           AutoSizeText("Login", style: Style.titleStyle),
           SizedBox(height: 50.h),
           AutoSizeText("รหัสพนักงาน", style: Style.formLabelStyle),
-          _buildForm(
-            controller.validateUsername,
-            controller.usernameController,
-            false,
-          ),
+          TextInputForm(
+              key: const Key("username"),
+              validator: controller.validateUsername,
+              controller: controller.usernameController,
+              hideValue: false),
           SizedBox(height: 10.h),
           AutoSizeText("Password", style: Style.formLabelStyle),
-          _buildForm(
-            controller.validatePassword,
-            controller.passwordController,
-            true,
-          ),
+          TextInputForm(
+              key: const Key("password"),
+              validator: controller.validatePassword,
+              controller: controller.passwordController,
+              hideValue: true),
           const Spacer(),
-          _buildButton(),
+          const LoginButton(
+            key: Key("login_button"),
+          ),
           const Spacer(),
         ],
       ),
     );
   }
+}
 
-  Center _buildButton() {
-    return Center(
-      child: DefaultButton(
-        title: "เข้าสู่ระบบ",
-        onPressed: controller.onClickSignIn,
-      ),
-    );
-  }
+class TextInputForm extends StatelessWidget {
+  const TextInputForm({
+    Key? key,
+    required this.validator,
+    required this.controller,
+    required this.hideValue,
+  }) : super(key: key);
 
-  Container _buildForm(
-    String? Function(String?)? validator,
-    TextEditingController controller,
-    bool hideValue,
-  ) {
+  final String? Function(String? p1)? validator;
+  final TextEditingController controller;
+  final bool hideValue;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10.h),
       child: TextFormField(
