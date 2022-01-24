@@ -9,10 +9,17 @@ class SplashViewModel extends GetxController {
 
   Future<void> init() async {
     try {
+      await Future.delayed(const Duration(seconds: 1));
       await _service.fetchInfo();
       return Get.offNamed(Routes.home);
     } catch (e) {
       return Get.offNamed(Routes.login);
     }
+  }
+
+  @override
+  void onReady() async {
+    await init();
+    super.onReady();
   }
 }

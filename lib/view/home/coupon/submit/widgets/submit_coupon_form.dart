@@ -40,27 +40,20 @@ class SummitCouponForm extends GetView<SubmitCouponViewModel> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _buildCardContent(),
+            UseCouponCardContent(formStyle: _formStyle),
             SizedBox(height: 120.h),
             _buildNotFoundHelper(),
             const Spacer(),
-            _buildButton(),
+            UseCouponSubmitButton(
+              isDialog: isDialog,
+              key: const Key("Usecoupon_button"),
+            ),
             const Spacer(),
           ],
         ),
       ],
     );
   }
-
-  Padding _buildButton() => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 60.w),
-        child: DefaultButton(
-          title: "ยืนยัน",
-          onPressed: () {
-            controller.onClickConfirm(isDialog);
-          },
-        ),
-      );
 
   _buildNotFoundHelper() {
     return Obx(
@@ -96,8 +89,39 @@ class SummitCouponForm extends GetView<SubmitCouponViewModel> {
             ),
     );
   }
+}
 
-  Padding _buildCardContent() => Padding(
+class UseCouponSubmitButton extends GetView<SubmitCouponViewModel> {
+  const UseCouponSubmitButton({
+    Key? key,
+    required this.isDialog,
+  }) : super(key: key);
+
+  final bool isDialog;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: EdgeInsets.symmetric(horizontal: 60.w),
+        child: DefaultButton(
+          title: "ยืนยัน",
+          onPressed: () {
+            controller.onClickConfirm(isDialog);
+          },
+        ),
+      );
+}
+
+class UseCouponCardContent extends GetView<SubmitCouponViewModel> {
+  const UseCouponCardContent({
+    Key? key,
+    required TextStyle formStyle,
+  })  : _formStyle = formStyle,
+        super(key: key);
+
+  final TextStyle _formStyle;
+
+  @override
+  Widget build(BuildContext context) => Padding(
         padding: EdgeInsets.only(
           left: 80.w,
           right: 80.w,
@@ -135,6 +159,7 @@ class SummitCouponForm extends GetView<SubmitCouponViewModel> {
               child: Form(
                 key: controller.formKey,
                 child: TextFormField(
+                  key: const Key("usecoupon_textfield"),
                   maxLength: 8,
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
