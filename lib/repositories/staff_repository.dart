@@ -14,30 +14,22 @@ class StaffRepository implements IStaffRepository {
 
   @override
   Future<StaffResponse> login(String username, String password) async {
-    try {
-      var response = await _apiService.postResponse(
-        ApiEndPoints.login,
-        {
-          "username": username,
-          "password": password,
-        },
-      );
-      return StaffResponse.fromJson(response);
-    } catch (e) {
-      rethrow;
-    }
+    var response = await _apiService.postResponse(
+      ApiEndPoints.login,
+      {
+        "username": username,
+        "password": password,
+      },
+    );
+    return StaffResponse.fromJson(response);
   }
 
   @override
   Future<StaffResponse> getInfo(String token) async {
-    try {
-      var response = await _apiService.getResponse(
-        ApiEndPoints.info,
-        token: token,
-      );
-      return StaffResponse.fromJson(response);
-    } catch (e) {
-      rethrow;
-    }
+    var response = await _apiService.getResponse(
+      ApiEndPoints.info,
+      token: token,
+    );
+    return StaffResponse.fromJson(response);
   }
 }
