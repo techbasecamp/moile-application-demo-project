@@ -2,7 +2,11 @@ import 'package:intl/intl.dart';
 
 class TextUtil {
   String handleOverflow(String raw, int limit) {
-    return raw.length <= limit ? raw : raw.substring(0, limit) + "...";
+    if (limit <= 0) {
+      return raw;
+    } else {
+      return raw.length <= limit ? raw : raw.substring(0, limit) + "...";
+    }
   }
 
   String formatNumber(int number, {int? limit}) {

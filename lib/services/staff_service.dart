@@ -1,7 +1,8 @@
+import 'package:demo_project/assets/constants.dart';
+import 'package:demo_project/data/local/base_local_storage.dart';
 import 'package:demo_project/models/staff/login_response.dart';
 import 'package:demo_project/repositories/staff_repository.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class IStaffService {
   String get branchName;
@@ -11,16 +12,12 @@ abstract class IStaffService {
 }
 
 class StaffService extends GetxService implements IStaffService {
-  late String _branchName;
+  String _branchName = "";
+
   late final IStaffRepository _repository;
+  late final BaseLocalStorage _storage;
 
-  StaffService(this._repository);
-
-  @override
-  void onInit() {
-    super.onInit();
-    _branchName = "";
-  }
+  StaffService(this._repository, this._storage);
 
   @override
   String get branchName => _branchName;
@@ -28,7 +25,6 @@ class StaffService extends GetxService implements IStaffService {
   @override
   Future<void> login(String username, String password) async {
     StaffResponse? response;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
 
     try {
       response = await _repository.login(username, password);
@@ -37,15 +33,14 @@ class StaffService extends GetxService implements IStaffService {
     }
 
     _branchName = response.branchName;
-    await prefs.setString("TOKEN", response.token);
+    await _storage.setString(Constant.token, response.token);
   }
 
   @override
   Future<void> fetchInfo() async {
     StaffResponse? response;
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString("TOKEN");
+    String? token = await _storage.getString(Constant.token);
 
     try {
       response = await _repository.getInfo(token!);
@@ -58,7 +53,7 @@ class StaffService extends GetxService implements IStaffService {
 
   @override
   Future<void> logout() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove("TOKEN");
+    _branchName = '';
+    await _storage.remove(Constant.token);
   }
 }

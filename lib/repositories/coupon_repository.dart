@@ -16,37 +16,29 @@ class CouponRepository extends ICouponRepository {
 
   @override
   Future<CheckCouponResponse> checkCoupon(String token, String qrcode) async {
-    try {
-      var response = await _apiService.postResponse(
-        ApiEndPoints.checkQRCode,
-        {
-          "qrcode": qrcode,
-          "coupon_type": "แถมฟรี",
-          "order_channel": "E",
-        },
-        token: token,
-      );
-      return CheckCouponResponse.fromJson(response);
-    } catch (e) {
-      rethrow;
-    }
+    var response = await _apiService.postResponse(
+      ApiEndPoints.checkQRCode,
+      {
+        "qrcode": qrcode,
+        "coupon_type": "แถมฟรี",
+        "order_channel": "E",
+      },
+      token: token,
+    );
+    return CheckCouponResponse.fromJson(response);
   }
 
   @override
   Future<UseCouponResponse> useCoupon(
       String token, List<String> qrcodes, List<Menu> menus) async {
-    try {
-      var response = await _apiService.postResponse(
-        ApiEndPoints.useCoupon,
-        {
-          "qrcode": qrcodes,
-          "menu": menus.map((i) => i.toJson()).toList(),
-        },
-        token: token,
-      );
-      return UseCouponResponse.fromJson(response);
-    } catch (e) {
-      rethrow;
-    }
+    var response = await _apiService.postResponse(
+      ApiEndPoints.useCoupon,
+      {
+        "qrcode": qrcodes,
+        "menu": menus.map((i) => i.toJson()).toList(),
+      },
+      token: token,
+    );
+    return UseCouponResponse.fromJson(response);
   }
 }

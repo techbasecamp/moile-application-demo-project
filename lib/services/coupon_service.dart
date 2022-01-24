@@ -1,8 +1,9 @@
+import 'package:demo_project/assets/constants.dart';
+import 'package:demo_project/data/local/base_local_storage.dart';
 import 'package:demo_project/models/coupons/check_coupon_response.dart';
 import 'package:demo_project/models/coupons/use_coupon_response.dart';
 import 'package:demo_project/repositories/coupon_repository.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ICouponService {
   List<Menu> get menus;
@@ -21,10 +22,11 @@ class CouponService extends GetxService implements ICouponService {
   Map<String, int> _qrcodes = {};
 
   late final ICouponRepository _repository;
+  late final BaseLocalStorage _storage;
 
   UseCouponResponse? _useCouponDetail;
 
-  CouponService(this._repository);
+  CouponService(this._repository, this._storage);
 
   @override
   void onInit() {
@@ -59,8 +61,7 @@ class CouponService extends GetxService implements ICouponService {
 
   @override
   Future<CheckCouponResponse> addCoupon(String qrcode) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString("TOKEN");
+    String? token = await _storage.getString(Constant.token);
 
     CheckCouponResponse coupon = await _repository.checkCoupon(token!, qrcode);
 
@@ -73,16 +74,13 @@ class CouponService extends GetxService implements ICouponService {
 
   void _addCouponList(CheckCouponResponse coupon, String qrcode) {
     int? oldMenuNumber = _qrcodes[qrcode];
-
     _qrcodes[qrcode] = oldMenuNumber ?? 0 + coupon.menu.length;
-
     _menus.addAll(coupon.menu);
   }
 
   @override
   Future<void> useCoupon() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString("TOKEN");
+    String? token = await _storage.getString(Constant.token);
 
     _useCouponDetail = await _repository.useCoupon(
       token!,
