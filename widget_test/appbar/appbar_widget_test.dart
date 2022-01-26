@@ -8,8 +8,8 @@ import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mockito/annotations.dart';
-
-import 'testable_screenutil.dart';
+import 'package:mockito/mockito.dart';
+import '../testable_screenutil.dart';
 
 @GenerateMocks([StaffService])
 void main() {
@@ -26,8 +26,4 @@ void main() {
     //   expect(logout, findsOneWidget);
     // });
   });
-}
-
-class GenerateMocks {
-  const GenerateMocks(List<Type> list);
 }
