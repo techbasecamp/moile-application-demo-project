@@ -7,9 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CouponHeader extends StatelessWidget {
   final String title;
   final int couponNumber;
-  final TextUtil textUtil = TextUtil();
 
-  CouponHeader({
+  const CouponHeader({
     Key? key,
     required this.title,
     required this.couponNumber,
@@ -31,7 +30,7 @@ class CouponHeader extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 5),
             child: AutoSizeText(
-              "${textUtil.formatNumber(couponNumber, limit: 999)} คูปอง",
+              "${TextUtil.formatNumber(couponNumber, limit: 999)} คูปอง",
               style: TextStyle(
                 fontSize: 14.sp,
                 color: Colors.white,

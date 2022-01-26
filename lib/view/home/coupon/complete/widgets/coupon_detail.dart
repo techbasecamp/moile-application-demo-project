@@ -9,8 +9,6 @@ class CouponDetail extends StatelessWidget {
   final String customerName;
   final String ref;
 
-  final TextUtil textUtil = TextUtil();
-
   CouponDetail({
     Key? key,
     required this.date,
@@ -90,7 +88,7 @@ class CouponDetail extends StatelessWidget {
             ),
             Expanded(
               child: AutoSizeText(
-                textUtil.handleOverflow(customerName, 18),
+                TextUtil.handleOverflow(customerName, 18),
                 style: _contentStyle,
                 maxLines: 1,
               ),

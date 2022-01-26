@@ -1,9 +1,8 @@
+import 'package:demo_project/binding/app_binding.dart';
 import 'package:demo_project/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import 'binding/app_binding.dart';
 
 void main() {
   runApp(const MyApp());

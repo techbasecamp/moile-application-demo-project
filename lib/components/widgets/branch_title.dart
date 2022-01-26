@@ -9,9 +9,8 @@ import 'package:demo_project/utils/text.dart';
 
 class BranchTitle extends StatelessWidget {
   final String branchName;
-  final TextUtil textUtil = TextUtil();
 
-  BranchTitle({Key? key, required this.branchName}) : super(key: key);
+  const BranchTitle({Key? key, required this.branchName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class BranchTitle extends StatelessWidget {
             SvgPicture.asset(Assets.pinLogo),
             const SizedBox(width: 10),
             AutoSizeText(
-              textUtil.handleOverflow(branchName, 35),
+              TextUtil.handleOverflow(branchName, 35),
               style: TextStyle(
                 fontSize: 17.sp,
                 fontWeight: FontWeight.bold,

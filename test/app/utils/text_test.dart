@@ -9,9 +9,7 @@ void main() {
   group('Handle Overflow', () {
     for (var testcase in textOverflowTestcases) {
       test(testcase.testName, () {
-        TextUtil textUtil = TextUtil();
-
-        String result = textUtil.handleOverflow(
+        String result = TextUtil.handleOverflow(
           testcase.testText,
           testcase.testLimit,
         );
@@ -24,13 +22,10 @@ void main() {
   group('Format Number', () {
     for (var testcase in formatNumberTestcases) {
       test(testcase.testName, () {
-        TextUtil textUtil = TextUtil();
-
-        String result = textUtil.formatNumber(
+        String result = TextUtil.formatNumber(
           testcase.testNumber,
           limit: testcase.testLimit,
         );
-
         expect(result, testcase.expectedResult);
       });
     }

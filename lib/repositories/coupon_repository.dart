@@ -1,4 +1,3 @@
-import 'package:demo_project/data/exception.dart';
 import 'package:demo_project/data/network/api_end_points.dart';
 import 'package:demo_project/data/network/base_api_service.dart';
 import 'package:demo_project/models/coupons/check_coupon_response.dart';

@@ -15,15 +15,53 @@ class HomePage extends GetView<HomeViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: _buildAppbar(),
+      appBar: CustomAppbar(),
       backgroundColor: AppColor.red,
-      body: ARamenCardTemplate(content: _buildContent()),
+      body: ARamenCardTemplate(content: HomePageContent()),
     );
   }
+}
 
-  AppBar _buildAppbar() {
+class HomePageContent extends GetView<HomeViewModel> {
+  const HomePageContent({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        BranchTitle(branchName: controller.branchName),
+        const Spacer(),
+        MenuButton(
+          key: const Key("usecoupon"),
+          text: "ใช้คูปอง",
+          textColor: Colors.white,
+          icon: SvgPicture.asset(
+            Assets.couponLogo,
+            color: Colors.white,
+            width: 31.w,
+          ),
+          backgroundColor: AppColor.brightRed,
+          overlayColor: AppColor.red,
+          onPressed: controller.onClickUseCoupon,
+        ),
+        const Spacer(),
+      ],
+    );
+  }
+}
+
+class CustomAppbar extends GetView<HomeViewModel> with PreferredSizeWidget {
+  const CustomAppbar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
@@ -39,41 +77,28 @@ class HomePage extends GetView<HomeViewModel> {
     );
   }
 
-  Column _buildContent() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        BranchTitle(branchName: controller.branchName),
-        const Spacer(),
-        _buildButton(
-          text: "ใช้คูปอง",
-          textColor: Colors.white,
-          icon: _buildCouponIcon(),
-          backgroundColor: AppColor.brightRed,
-          overlayColor: AppColor.red,
-          onPressed: controller.onClickUseCoupon,
-        ),
-        const Spacer(),
-      ],
-    );
-  }
+  @override
+  Size get preferredSize => const Size(double.infinity, 56);
+}
 
-  SvgPicture _buildCouponIcon() {
-    return SvgPicture.asset(
-      Assets.couponLogo,
-      color: Colors.white,
-      width: 31.w,
-    );
-  }
-
-  _buildButton({
-    required String text,
-    required Widget icon,
-    required Color textColor,
-    required VoidCallback onPressed,
-    required Color backgroundColor,
-    required Color overlayColor,
-  }) {
+class MenuButton extends StatelessWidget {
+  const MenuButton(
+      {Key? key,
+      required this.onPressed,
+      required this.backgroundColor,
+      required this.overlayColor,
+      required this.icon,
+      required this.text,
+      required this.textColor})
+      : super(key: key);
+  final VoidCallback onPressed;
+  final Color backgroundColor;
+  final Color overlayColor;
+  final Widget icon;
+  final String text;
+  final Color textColor;
+  @override
+  Widget build(BuildContext context) {
     return OutlinedButton(
       style: ButtonStyle(
         padding: MaterialStateProperty.all(

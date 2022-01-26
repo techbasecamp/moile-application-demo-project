@@ -8,9 +8,7 @@ class CouponTitle extends StatelessWidget {
   final String menu;
   final double fontSize;
 
-  final TextUtil textUtil = TextUtil();
-
-  CouponTitle({
+  const CouponTitle({
     Key? key,
     required this.menu,
     required this.fontSize,
@@ -30,7 +28,7 @@ class CouponTitle extends StatelessWidget {
         ),
         SizedBox(width: 5.w),
         AutoSizeText(
-          textUtil.handleOverflow(menu, 15),
+          TextUtil.handleOverflow(menu, 15),
           style: TextStyle(
             fontSize: fontSize,
             fontWeight: FontWeight.bold,
