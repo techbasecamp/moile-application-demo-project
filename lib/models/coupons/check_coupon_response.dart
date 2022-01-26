@@ -59,8 +59,6 @@ class CheckCouponResponse {
 
   Map<String, dynamic> toJson() => {
         "valid_coupon": validCoupon,
-        "message_th": messageTh,
-        "message_en": messageEn,
         "member_firstname": memberFirstname,
         "member_id": memberId,
         "member_lastname": memberLastname,

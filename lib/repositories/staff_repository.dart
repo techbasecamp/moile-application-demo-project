@@ -1,6 +1,6 @@
 import 'package:demo_project/data/network/api_end_points.dart';
 import 'package:demo_project/data/network/base_api_service.dart';
-import 'package:demo_project/models/staff/login_response.dart';
+import 'package:demo_project/models/staff/staff_response.dart';
 
 abstract class IStaffRepository {
   Future<StaffResponse> login(String username, String password);
