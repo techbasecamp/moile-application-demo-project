@@ -13,10 +13,10 @@ class ScreenWidget extends StatelessWidget {
   }
 }
 
-class TestableWidget extends StatelessWidget {
+class TestWidget extends StatelessWidget {
   final Widget child;
 
-  const TestableWidget({Key? key, required this.child}) : super(key: key);
+  const TestWidget({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

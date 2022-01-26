@@ -13,8 +13,8 @@ class DefaultButton extends StatelessWidget {
 
   const DefaultButton({
     Key? key,
-    this.onPressed,
-    this.title = "",
+    required this.onPressed,
+    required this.title,
     this.textColor = Colors.white,
     this.prefix,
     this.backgroundColor = AppColor.brightRed,

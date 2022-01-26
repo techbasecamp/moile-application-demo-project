@@ -8,7 +8,7 @@ void main() {
     testWidgets('Init Branch Title', (WidgetTester tester) async {
       await tester.pumpAndSettle();
       await tester.pumpWidget(
-          const TestableWidget(child: BranchTitle(branchName: 'test_name')));
+          const TestWidget(child: BranchTitle(branchName: 'test_name')));
       await tester.pump();
       expect(find.text("test_name"), findsOneWidget);
     });

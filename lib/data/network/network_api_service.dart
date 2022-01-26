@@ -21,7 +21,7 @@ class NetworkApiService extends BaseApiService {
       final response = await http.get(uri, headers: headers);
       responseJson = returnResponse(response);
     } on SocketException {
-      throw FetchDataException('No Internet Connection');
+      throw FetchDataException('ไม่มีการเชื่อมต่ออินเตอร์เน็ต');
     }
     return responseJson;
   }
