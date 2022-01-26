@@ -43,7 +43,7 @@ void main() {
       final Finder useCouponMenuButton = find.byKey(const Key("usecoupon"));
       final Finder useCouponTextfield =
           find.byKey(const Key("usecoupon_textfield"));
-      final Finder useCouponButton = find.byKey(const Key("usecoupon_button"));
+      // final Finder useCouponButton = find.byKey(const Key("usecoupon_button"));
 
       await pumpUntilFound(tester, usernameTextfield);
       await pumpUntilFound(tester, passwordTextfield);

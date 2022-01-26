@@ -12,9 +12,7 @@ class MenuCard extends StatelessWidget {
   final String menuName;
   final int quantity;
 
-  final TextUtil textUtil = TextUtil();
-
-  MenuCard({
+  const MenuCard({
     Key? key,
     required this.isSlide,
     required this.menuName,
@@ -43,7 +41,7 @@ class MenuCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    _buildMenuImage(),
+                    const MenuImage(),
                     SizedBox(width: 25.w),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +49,7 @@ class MenuCard extends StatelessWidget {
                       children: [
                         CouponTitle(menu: menuName, fontSize: 20.sp),
                         AutoSizeText(
-                          "${textUtil.formatNumber(quantity, limit: 999)} ชาม",
+                          "${TextUtil.formatNumber(quantity, limit: 999)} ชาม",
                           style: TextStyle(
                             fontSize: 20.sp,
                             fontWeight: FontWeight.w500,
@@ -69,8 +67,15 @@ class MenuCard extends StatelessWidget {
       ),
     );
   }
+}
 
-  Container _buildMenuImage() {
+class MenuImage extends StatelessWidget {
+  const MenuImage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14.r),

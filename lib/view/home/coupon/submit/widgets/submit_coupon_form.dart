@@ -42,7 +42,10 @@ class SummitCouponForm extends GetView<SubmitCouponViewModel> {
           children: [
             UseCouponCardContent(formStyle: _formStyle),
             SizedBox(height: 120.h),
-            _buildNotFoundHelper(),
+            UseCouponNotFound(
+              textStyle: _textStyle,
+              errorColor: errorColor,
+            ),
             const Spacer(),
             UseCouponSubmitButton(
               isDialog: isDialog,
@@ -54,8 +57,21 @@ class SummitCouponForm extends GetView<SubmitCouponViewModel> {
       ],
     );
   }
+}
 
-  _buildNotFoundHelper() {
+class UseCouponNotFound extends GetView<SubmitCouponViewModel> {
+  const UseCouponNotFound({
+    Key? key,
+    required TextStyle textStyle,
+    required this.errorColor,
+  })  : _textStyle = textStyle,
+        super(key: key);
+
+  final TextStyle _textStyle;
+  final Color? errorColor;
+
+  @override
+  Widget build(BuildContext context) {
     return Obx(
       () => controller.error.value == ""
           ? const SizedBox()

@@ -16,9 +16,7 @@ import 'package:get/get.dart';
 import 'widgets/coupon_detail.dart';
 
 class CompletePage extends GetView<CompleteViewModel> {
-  CompletePage({Key? key}) : super(key: key);
-
-  final TextUtil textUtil = TextUtil();
+  const CompletePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class CompletePage extends GetView<CompleteViewModel> {
                 title: "ใช้คูปองสำเร็จ",
                 couponNumber: controller.couponNumber,
               ),
-              CurvesCard(child: _buildCardContent()),
+              CurvesCard(child: const CardContent()),
             ],
           ),
           Padding(
@@ -62,51 +60,20 @@ class CompletePage extends GetView<CompleteViewModel> {
       ),
     );
   }
+}
 
-  Padding _buildCardContent() {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: Style.smallPadding,
-        right: Style.smallPadding,
-        top: 50.h,
-      ),
-      child: Column(
-        children: [
-          CouponDetail(
-            customerName: controller.customerName,
-            date: controller.date,
-            ref: controller.refcode,
-            time: controller.time,
-          ),
-          Container(
-            width: double.infinity,
-            color: AppColor.red,
-            height: 2,
-            margin: EdgeInsets.only(top: 35.h),
-          ),
-          _buildList(),
-        ],
-      ),
-    );
-  }
+class CardItem extends StatelessWidget {
+  const CardItem({
+    Key? key,
+    required this.name,
+    required this.quantity,
+  }) : super(key: key);
 
-  _buildList() {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: controller.orders.length + 1,
-        itemBuilder: (context, index) {
-          return index == 0
-              ? SizedBox(height: 20.h)
-              : _buildItem(
-                  name: controller.getOrder(index - 1).menuName,
-                  quantity: controller.getOrder(index - 1).quantity,
-                );
-        },
-      ),
-    );
-  }
+  final String name;
+  final int quantity;
 
-  _buildItem({required String name, required int quantity}) {
+  @override
+  Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 15.h),
       padding: EdgeInsets.only(bottom: 15.h),
@@ -131,7 +98,7 @@ class CompletePage extends GetView<CompleteViewModel> {
           Expanded(
             flex: 20,
             child: Text(
-              textUtil.formatNumber(quantity, limit: 999) + " ชาม",
+              TextUtil.formatNumber(quantity, limit: 999) + " ชาม",
               style: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w500,
@@ -140,6 +107,59 @@ class CompletePage extends GetView<CompleteViewModel> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CardContent extends GetView<CompleteViewModel> {
+  const CardContent({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: Style.smallPadding,
+        right: Style.smallPadding,
+        top: 50.h,
+      ),
+      child: Column(
+        children: [
+          CouponDetail(
+            customerName: controller.customerName,
+            date: controller.date,
+            ref: controller.refcode,
+            time: controller.time,
+          ),
+          Container(
+            width: double.infinity,
+            color: AppColor.red,
+            height: 2,
+            margin: EdgeInsets.only(top: 35.h),
+          ),
+          const CardList(),
+        ],
+      ),
+    );
+  }
+}
+
+class CardList extends GetView<CompleteViewModel> {
+  const CardList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: controller.orders.length + 1,
+        itemBuilder: (context, index) {
+          return index == 0
+              ? SizedBox(height: 20.h)
+              : CardItem(
+                  name: controller.getOrder(index - 1).menuName,
+                  quantity: controller.getOrder(index - 1).quantity,
+                );
+        },
       ),
     );
   }

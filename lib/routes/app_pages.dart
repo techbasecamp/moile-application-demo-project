@@ -56,7 +56,7 @@ class AppPages {
         ),
         GetPage(
           name: complete,
-          page: () => CompletePage(),
+          page: () => const CompletePage(),
           binding: BindingsBuilder(
             () => Get.lazyPut(() => CompleteViewModel(Get.find())),
           ),

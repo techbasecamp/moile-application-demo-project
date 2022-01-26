@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
-class TextUtil {
-  String handleOverflow(String raw, int limit) {
+abstract class TextUtil {
+  static String handleOverflow(String raw, int limit) {
     if (limit <= 0) {
       return raw;
     } else {
@@ -9,7 +9,7 @@ class TextUtil {
     }
   }
 
-  String formatNumber(int number, {int? limit}) {
+  static String formatNumber(int number, {int? limit}) {
     int _number = number;
     bool shouldAdjustNumber = limit != null && number > limit;
     if (shouldAdjustNumber) _number = limit;
