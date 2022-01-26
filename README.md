@@ -15,7 +15,8 @@ flutter
 ```
 
 ```bash
-   testing : flutter drive --driver=test_driver/integration_test.dart  --target=test/integration_test/
+   integration test : flutter drive --driver=test_driver/integration_test.dart  --target=test/integration_test/
+   unit/widget test : flutter test test/
 ```
 
 ## Features
