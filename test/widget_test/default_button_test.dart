@@ -1,6 +1,4 @@
-import 'package:demo_project/components/widgets/branch_title.dart';
 import 'package:demo_project/components/widgets/default_button.dart';
-import 'package:demo_project/components/widgets/default_progress_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 

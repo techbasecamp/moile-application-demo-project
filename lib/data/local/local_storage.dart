@@ -20,4 +20,11 @@ class LocalStorage implements BaseLocalStorage {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove(key);
   }
+
+  Future<bool> reset() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return await prefs.clear();
+  }
+
+  
 }

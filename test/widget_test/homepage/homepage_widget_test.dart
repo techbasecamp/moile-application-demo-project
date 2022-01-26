@@ -12,7 +12,7 @@ import '../testable_screenutil.dart';
 void main() {
   var staffService = MockStaffService();
   setUpAll(() {
-    final HomeViewModel homeViewModel = Get.put(HomeViewModel(staffService));
+    Get.put(HomeViewModel(staffService));
   });
 
   when(staffService.branchName).thenReturn("");

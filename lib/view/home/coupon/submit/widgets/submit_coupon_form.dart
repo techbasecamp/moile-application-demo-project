@@ -49,7 +49,7 @@ class SummitCouponForm extends GetView<SubmitCouponViewModel> {
             const Spacer(),
             UseCouponSubmitButton(
               isDialog: isDialog,
-              key: const Key("Usecoupon_button"),
+              key: const Key("usecoupon_button"),
             ),
             const Spacer(),
           ],

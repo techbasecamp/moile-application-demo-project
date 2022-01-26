@@ -19,7 +19,6 @@ void main() {
         timeout, () => throw TimeoutException("Pump until has timed out"));
     while (timerDone != true) {
       await tester.pump();
-
       final found = tester.any(finder);
       if (found) {
         timerDone = true;
@@ -28,11 +27,10 @@ void main() {
     timer.cancel();
   }
 
-  group("Login Flow Testcase", () {
-    testWidgets('Login with correct email,password',
-        (WidgetTester tester) async {
+  group("Logout Flow Testcase", () {
+    testWidgets('Logout Flow', (WidgetTester tester) async {
       app.main();
-      await tester.pump();
+      await tester.pump(const Duration(seconds: 3));
       Key username = const Key("username");
       Key password = const Key("password");
       final Finder usernameTextfield = find.byKey(username);
@@ -40,11 +38,6 @@ void main() {
       final Finder loginButton = find.byKey(
         const Key("login_button"),
       );
-      final Finder useCouponMenuButton = find.byKey(const Key("usecoupon"));
-      final Finder useCouponTextfield =
-          find.byKey(const Key("usecoupon_textfield"));
-      // final Finder useCouponButton = find.byKey(const Key("usecoupon_button"));
-
       await pumpUntilFound(tester, usernameTextfield);
       await pumpUntilFound(tester, passwordTextfield);
       await pumpUntilFound(tester, loginButton);
@@ -53,14 +46,14 @@ void main() {
       await tester.enterText(passwordTextfield, "123456");
       await tester.pumpAndSettle();
       await tester.tap(loginButton);
-      await tester.pump();
-      expect(find.text("A Ramen"), findsOneWidget);
-
-      await pumpUntilFound(tester, useCouponMenuButton);
-      await tester.tap(useCouponMenuButton);
-      await tester.pump();
-      await tester.enterText(useCouponTextfield, "123456");
-      // await tester.tap(useCouponButton);
+      await tester.pumpAndSettle();
+      await pumpUntilFound(tester, find.text("A Ramen"));
+      final logoutButton = find.byIcon(Icons.logout_outlined);
+      await pumpUntilFound(tester, logoutButton);
+      await tester.tap(logoutButton);
+      await tester.pump(const Duration(seconds: 2));
+      
+      expect(find.text("Login"), findsOneWidget);
     });
   });
 }
