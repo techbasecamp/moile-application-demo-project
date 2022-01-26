@@ -12,11 +12,16 @@ class SubmitCouponPage extends GetView<SubmitCouponViewModel> {
   @override
   Widget build(BuildContext context) {
     controller.clearCouponData();
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: const DefaultAppbar(),
-      backgroundColor: AppColor.greyBackground,
-      body: SummitCouponForm(isDialog: false),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: const DefaultAppbar(),
+        backgroundColor: AppColor.greyBackground,
+        body: SummitCouponForm(isDialog: false),
+      ),
     );
   }
 }
