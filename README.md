@@ -2,12 +2,20 @@
 
 This flutter project demonstrates MVVM architecture and testing process which includes unit testing, widget testing, and integration testing
 
+## Prerequisite
+
+flutter
+
 ## Installation
 
 ```bash
    git clone https://github.com/techbasecamp/moile-application-demo-project.git
    flutter pub get
    flutter run
+```
+
+```bash
+   testing : flutter drive --driver=test_driver/integration_test.dart  --target=test/integration_test/
 ```
 
 ## Features
