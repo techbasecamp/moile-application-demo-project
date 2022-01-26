@@ -26,7 +26,6 @@ void main() {
           testcase.testNumber,
           limit: testcase.testLimit,
         );
-
         expect(result, testcase.expectedResult);
       });
     }
