@@ -5,7 +5,7 @@
 import 'dart:async' as _i4;
 
 import 'package:demo_project/data/local/local_storage.dart' as _i5;
-import 'package:demo_project/models/staff/login_response.dart' as _i2;
+import 'package:demo_project/models/staff/staff_response.dart' as _i2;
 import 'package:demo_project/repositories/staff_repository.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 

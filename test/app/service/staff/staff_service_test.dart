@@ -1,7 +1,7 @@
 import 'package:demo_project/assets/constants.dart';
 import 'package:demo_project/data/local/base_local_storage.dart';
 import 'package:demo_project/data/local/local_storage.dart';
-import 'package:demo_project/models/staff/login_response.dart';
+import 'package:demo_project/models/staff/staff_response.dart';
 import 'package:demo_project/repositories/staff_repository.dart';
 import 'package:demo_project/services/staff_service.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,14 +14,24 @@ import 'staff_service_test.mocks.dart';
 void main() {
   const mockToken = "Mock token";
 
-  StaffResponse mockStaffResponse = StaffResponse(
-    branchId: 1,
-    branchName: 'บางมด',
-    createdTimestamp: DateTime.now(),
-    staffId: 1,
-    token: mockToken,
-    username: 'maz@branch1',
-  );
+  List<StaffResponse> mockResponses = [
+    StaffResponse(
+      branchId: 1,
+      branchName: 'บางมด',
+      createdTimestamp: DateTime.now(),
+      staffId: 1,
+      token: mockToken,
+      username: 'maz@branch1',
+    ),
+    StaffResponse(
+      branchId: 2,
+      branchName: 'บางมด',
+      createdTimestamp: DateTime.now(),
+      staffId: 2,
+      token: mockToken,
+      username: 'maz@branch2',
+    )
+  ];
 
   BaseLocalStorage storage = MockLocalStorage();
   IStaffRepository staffRepository = MockStaffRepository();
@@ -36,11 +46,15 @@ void main() {
   );
 
   when(staffRepository.getInfo(mockToken)).thenAnswer(
-    (_) async => mockStaffResponse,
+    (_) async => mockResponses[0],
   );
 
   when(staffRepository.login('maz@branch1', '123456')).thenAnswer(
-    (_) async => mockStaffResponse,
+    (_) async => mockResponses[0],
+  );
+
+  when(staffRepository.login('maz@branch2', '123456')).thenAnswer(
+    (_) async => mockResponses[1],
   );
 
   group('Staff service', () {
@@ -50,7 +64,7 @@ void main() {
 
     test("Fetch Info", () async {
       await staffService.fetchInfo();
-      expect(staffService.branchName, mockStaffResponse.branchName);
+      expect(staffService.branchName, mockResponses[0].branchName);
     });
 
     test("Logout", () async {
@@ -59,8 +73,8 @@ void main() {
     });
 
     test("login", () async {
-      await staffService.login('maz@branch1', '123456');
-      expect(staffService.branchName, mockStaffResponse.branchName);
+      await staffService.login('maz@branch2', '123456');
+      expect(staffService.branchName, mockResponses[1].branchName);
     });
   });
 }

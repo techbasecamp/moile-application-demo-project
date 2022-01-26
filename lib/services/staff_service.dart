@@ -1,6 +1,6 @@
 import 'package:demo_project/assets/constants.dart';
 import 'package:demo_project/data/local/base_local_storage.dart';
-import 'package:demo_project/models/staff/login_response.dart';
+import 'package:demo_project/models/staff/staff_response.dart';
 import 'package:demo_project/repositories/staff_repository.dart';
 import 'package:get/get.dart';
 

@@ -147,5 +147,23 @@ void main() {
       await couponService.useCoupon();
       expect(couponService.useCouponDetail!.menu.length, 1);
     });
+
+    test("Remove some menu", () async {
+      couponService.clearData();
+      await couponService.addCoupon("12345678");
+      await couponService.addCoupon("11111111");
+      couponService.removeMenu("11111111", "1");
+      expect(couponService.qrcodes, {"11111111": 1, "12345678": 1});
+      expect(couponService.menus.length, 2);
+    });
+
+    test("Remove some QR", () async {
+      couponService.clearData();
+      await couponService.addCoupon("12345678");
+      await couponService.addCoupon("11111111");
+      couponService.removeMenu("12345678", "1");
+      expect(couponService.qrcodes, {"11111111": 2});
+      expect(couponService.menus.length, 2);
+    });
   });
 }
