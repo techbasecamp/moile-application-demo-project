@@ -1,19 +1,15 @@
-
 # Mobile Application Demo Project
 
-This flutter project demonstrates MVVM architecture and testing process which includes unit testing, widget testing, and integration testing 
-
+This flutter project demonstrates MVVM architecture and testing process which includes unit testing, widget testing, and integration testing
 
 ## Installation
-
-
 
 ```bash
    git clone https://github.com/techbasecamp/moile-application-demo-project.git
    flutter pub get
-   flutter run 
+   flutter run
 ```
-  
+
 ## Features
 
 - Login auth
@@ -22,15 +18,13 @@ This flutter project demonstrates MVVM architecture and testing process which in
 - Delete coupons
 - Redeem coupons
 
-
-
 ## Testing Account
 
 username : demo@branch1
 
 password : aramendemo
 
-qrcode available list : 
+qrcode available list :
 
 11111111
 
@@ -42,18 +36,19 @@ qrcode available list :
 
 44538631
 
-
-
-
-
 ## Screenshots
 
-![App Screenshot](https://ibb.co/bHvjX5Q)
-![App Screenshot](https://ibb.co/qsXjvnj)
+<img src=https://storage.googleapis.com/demo_aramen/S__5324802.jpg width=200>
+<img src=https://storage.googleapis.com/demo_aramen/S__5324803.jpg width=200>
+<img src=https://storage.googleapis.com/demo_aramen/S__5324804.jpg width=200>
+<img src=https://storage.googleapis.com/demo_aramen/S__5324805.jpg width=200>
+<img src=https://storage.googleapis.com/demo_aramen/S__5324807.jpg width=200>
+<img src=https://storage.googleapis.com/demo_aramen/S__5324808.jpg width=200>
+<img src=https://storage.googleapis.com/demo_aramen/S__5324809.jpg width=200>
+<img src=https://storage.googleapis.com/demo_aramen/S__5324810.jpg width=200>
 
 ## Tech Stack
 
 **Client:** Flutter
 
-**Server:** Golang 
-
+**Server:** Golang
